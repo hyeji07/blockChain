@@ -1,0 +1,9 @@
+.main {
+  min-height: calc(100% - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.outletContainer {
+  padding: 24px;
+}
