@@ -6,7 +6,7 @@ const { persistAtom } = recoilPersist({
   storage: localStorage,
 });
 
-//Kaikas
+//Kaikas.
 export const walletKey = atom({
   key: 'walletKey',
   default: null,
