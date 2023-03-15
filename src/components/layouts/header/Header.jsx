@@ -4,7 +4,8 @@ import { useRecoilState } from 'recoil';
 import { walletKey } from '@stores/wallet/wallet';
 import Caver from 'caver-js';
 
-import { browserName, browserVersion } from 'react-device-detect';
+//브라우저확인
+//import { browserName, browserVersion } from 'react-device-detect';
 
 /* import { Toolbar, Typography, IconButton, InputBase } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -16,7 +17,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; */
 
 import CreateBtn from '../../btns/CreateBtn';
 
-console.log(`${browserName} ${browserVersion}`);
+//console.log(`${browserName} ${browserVersion}`);
 
 export function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -103,7 +104,7 @@ export default function Header() {
   };
 
   //Mobile
-  const connectMobile = async () => {
+  const connectKaikasMobile = async () => {
     //const isSafariMobile = 'Mobile Safari' === browserName;
     //const isChrome = 'Chrome' === browserName;
 
@@ -127,8 +128,49 @@ export default function Header() {
       const { request_key } = result.data;
 
       console.log(request_key);
-      //await axios.get();
-      window.location.href(`kaikas://wallet/api?request_key=${request_key}`);
+
+      window.location.href = `kaikas://wallet/api?request_key=${request_key}`;
+
+      const a = await axios.get(
+        `https://api.kaikas.io/api/v1/k/result/${request_key}`
+      );
+      console.log(a);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const connectMetaMaskMobile = async () => {
+    //const isSafariMobile = 'Mobile Safari' === browserName;
+    //const isChrome = 'Chrome' === browserName;
+
+    //
+    try {
+      const body = {
+        type: 'auth',
+        bapp: {
+          name: 'test app',
+          callback: {
+            success: 'https://www.google.com/search?q=success',
+            fail: 'https://www.google.com/search?q=fail',
+          },
+        },
+      };
+      const result = await axios.post(
+        'https://api.kaikas.io/api/v1/k/prepare',
+        body
+      );
+      //console.log(result.data);
+      const { request_key } = result.data;
+
+      console.log(request_key);
+
+      window.location.href = `kaikas://wallet/api?request_key=${request_key}`;
+
+      const a = await axios.get(
+        `https://api.kaikas.io/api/v1/k/result/${request_key}`
+      );
+      console.log(a);
     } catch (err) {
       console.log(err);
     }
@@ -175,17 +217,17 @@ export default function Header() {
                 <div>
                   <CreateBtn
                     text={'kaikas 연결'}
-                    onClick={connectMobile}
+                    onClick={connectKaikasMobile}
                     className='noticeUpdateBtn'
                   />
                 </div>
-                {/*  <div>
+                <div>
                   <CreateBtn
                     text={'metamask 연결'}
-                    onClick={handleOpenMetamask}
+                    onClick={connectMetaMaskMobile}
                     className='noticeUpdateBtn'
                   />
-                </div> */}
+                </div>
               </div>
             </>
           )}
