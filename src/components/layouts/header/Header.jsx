@@ -104,8 +104,8 @@ export default function Header() {
 
   //Mobile
   const connectMobile = async () => {
-    const isSafariMobile = 'Mobile Safari' === browserName;
-    const isChrome = 'Chrome' === browserName;
+    //const isSafariMobile = 'Mobile Safari' === browserName;
+    //const isChrome = 'Chrome' === browserName;
 
     //
     try {
@@ -123,8 +123,17 @@ export default function Header() {
         'https://api.kaikas.io/api/v1/k/prepare',
         body
       );
-      console.log(result);
-    } catch {}
+      //console.log(result.data);
+      const { request_key } = result.data;
+
+      //console.log(request_key);
+      await axios.post(
+        `https://klipwallet.com/?target=/a2a?request_key=${request_key}`
+      );
+      //console.log(sendRequestKey);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
