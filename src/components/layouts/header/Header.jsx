@@ -126,7 +126,7 @@ export default function Header() {
       //console.log(result.data);
       const { request_key } = result.data;
 
-      //console.log(request_key);
+      console.log(request_key);
       await axios.post(
         `https://klipwallet.com/?target=/a2a?request_key=${request_key}`
       );
