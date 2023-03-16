@@ -138,8 +138,9 @@ export default function Header() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }; //Mobile용이라 서버에서 확인필요해서 진행하다 중단된 상태
 
+  //메타마스크는 모바일 아직 안에 코드 진행안됨(Kaikas꺼 코드 일단 복붙한 상태임)
   const connectMetaMaskMobile = async () => {
     //const isSafariMobile = 'Mobile Safari' === browserName;
     //const isChrome = 'Chrome' === browserName;
